@@ -130,6 +130,18 @@
   100% { transform: scale(2); opacity: 0; }
 }
 
+@keyframes scan {
+  0% { top: 0; }
+  50% { top: 100%; }
+  100% { top: 0; }
+}
+
+@keyframes scan-v {
+  0% { left: 0; }
+  50% { left: 100%; }
+  100% { left: 0; }
+}
+
 .animate-slide-in { animation: slide-in 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
 .animate-fade-in { animation: fade-in 0.3s ease-out; }
 .animate-bounce-in { animation: bounce-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }

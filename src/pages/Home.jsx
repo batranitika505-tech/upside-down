@@ -7,6 +7,8 @@ import AlertFeed from '../components/AlertFeed';
 import ReportModal from '../components/ReportModal';
 import AIChat from '../components/AIChat';
 import NotificationHub from '../components/NotificationHub';
+import WeatherWidget from '../components/WeatherWidget';
+import NearbySafeZones from '../components/NearbySafeZones';
 import { AlertTriangle, Navigation, LocateFixed, Loader2, CheckCircle2 } from 'lucide-react';
 
 export default function Home({ user }) {
@@ -257,6 +259,28 @@ export default function Home({ user }) {
         </div>
       )}
 
+      {/* Global Threat Level Indicator */}
+      <div className="absolute top-20 left-4 z-40 hidden lg:block animate-fade-in">
+        <div className="glass-card p-4 flex flex-col gap-3 shadow-[0_20px_50px_rgba(0,0,0,0.4)] border-white/10">
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <div className="w-12 h-12 rounded-full border-2 border-red-500/30 flex items-center justify-center">
+                <span className="text-xl font-black text-red-500">4.2</span>
+              </div>
+              <div className="absolute inset-0 rounded-full border-2 border-red-500 animate-ping opacity-20" />
+            </div>
+            <div>
+              <p className="text-[10px] font-black text-resq-muted uppercase tracking-widest">Global Threat Index</p>
+              <h2 className="text-sm font-bold text-red-400 uppercase">Elevated Risk</h2>
+            </div>
+          </div>
+          <div className="w-full bg-resq-dark/50 h-1.5 rounded-full overflow-hidden border border-white/5">
+            <div className="bg-red-500 h-full w-[42%] shadow-[0_0_10px_rgba(239,68,68,0.5)]" />
+          </div>
+          <p className="text-[9px] text-resq-muted leading-tight max-w-[120px]">Based on real-time crowd reports & authority data.</p>
+        </div>
+      </div>
+
       {showLocationBanner && locationStatus === 'error' && locationError && (
         <div className="absolute top-16 left-1/2 -translate-x-1/2 z-40 animate-slide-down w-[90vw] max-w-lg">
           <div className="glass-card px-4 py-2 flex items-start gap-2 text-sm text-amber-400">
@@ -293,6 +317,12 @@ export default function Home({ user }) {
       {/* Notification Hub (Toasts) */}
       <NotificationHub alerts={alerts} zones={zones} />
 
+      {/* Weather & Insights Widget */}
+      <WeatherWidget alerts={alerts} userLocation={userLocation} />
+
+      {/* Nearby Safe Zones Widget */}
+      <NearbySafeZones zones={zones} userLocation={userLocation} />
+
       {/* Alert Feed Panel */}
       <AlertFeed
         alerts={alerts}
@@ -323,27 +353,29 @@ export default function Home({ user }) {
       />
 
       {/* Floating Action Buttons */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-3">
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-40 flex items-center gap-4 bg-resq-dark/40 backdrop-blur-2xl p-2 rounded-[24px] border border-white/5 shadow-[0_30px_60px_rgba(0,0,0,0.6)] animate-slide-up">
         {/* Take Me to Safety */}
         <button
           onClick={handleTakeToSafety}
-          className="floating-btn bg-gradient-to-r from-emerald-500 to-green-600 text-white glow-green"
+          className="group relative flex items-center gap-3 px-6 py-4 rounded-[18px] bg-emerald-500 hover:bg-emerald-400 text-white font-black text-[12px] uppercase tracking-widest transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_15px_30px_rgba(16,185,129,0.3)]"
           title="Navigate to nearest safe zone"
         >
-          <Navigation size={20} className="animate-pulse-slow" />
-          <span className="hidden sm:inline">Take Me to Safety</span>
-          <span className="sm:hidden">Safety</span>
+          <div className="absolute inset-0 rounded-[18px] bg-emerald-400 animate-pulse opacity-20 group-hover:opacity-40 transition-opacity" />
+          <Navigation size={20} className="relative z-10 animate-pulse-slow" />
+          <span className="relative z-10 hidden sm:inline">Take Me to Safety</span>
+          <span className="relative z-10 sm:hidden">Safety</span>
         </button>
 
         {/* Locate Me */}
         <button
           onClick={startLocationWatch}
-          className="floating-btn bg-resq-card border border-resq-border/50 text-resq-text hover:bg-resq-border/20"
+          className="group p-4 rounded-[18px] bg-resq-card/80 border border-white/10 text-resq-accent hover:bg-resq-accent hover:text-white transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl"
           title="Recenter and update my location"
         >
-          <LocateFixed size={20} className={locationStatus === 'fetching' ? 'animate-spin text-resq-accent' : 'text-resq-accent'} />
-          <span className="hidden sm:inline">Locate Me</span>
+          <LocateFixed size={20} className={locationStatus === 'fetching' ? 'animate-spin' : ''} />
         </button>
+
+        <div className="w-[1px] h-8 bg-white/10 mx-1" />
 
         {/* Report Hazard */}
         <button
@@ -351,12 +383,12 @@ export default function Home({ user }) {
             setReportCoords(userLocation || { lat: 18.5204, lng: 73.8567 });
             setShowReport(true);
           }}
-          className="floating-btn bg-gradient-to-r from-amber-500 to-orange-600 text-white"
+          className="group flex items-center gap-3 px-6 py-4 rounded-[18px] bg-resq-card border border-white/10 text-amber-400 hover:bg-amber-500 hover:text-white transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl"
           title="Report a hazard at your current location"
         >
-          <AlertTriangle size={20} />
-          <span className="hidden sm:inline">Report Hazard</span>
-          <span className="sm:hidden">Report</span>
+          <AlertTriangle size={20} className="group-hover:animate-bounce" />
+          <span className="hidden sm:inline font-black text-[12px] uppercase tracking-widest">Report Hazard</span>
+          <span className="sm:hidden font-black text-[12px] uppercase tracking-widest">Report</span>
         </button>
       </div>
     </div>

@@ -139,6 +139,14 @@ export default function Map({ zones, userLocation, mapCenter, detectedLocation, 
 
   return (
     <div className="absolute inset-0 z-0">
+      {/* Custom Dark Theme Filter Overlay */}
+      <div className="absolute inset-0 z-[1] pointer-events-none bg-resq-dark/10 backdrop-contrast-[1.1] backdrop-brightness-[0.9]" />
+
+      {/* Real-time Scanning Effect */}
+      <div className="absolute inset-0 z-[2] pointer-events-none overflow-hidden opacity-20">
+        <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-resq-accent to-transparent animate-[scan_8s_linear_infinite]" />
+        <div className="absolute top-0 left-0 w-[2px] h-full bg-gradient-to-b from-transparent via-resq-accent to-transparent animate-[scan-v_12s_linear_infinite]" />
+      </div>
       {/* Filter Bar (Outside MapContainer to prevent click-through issues) */}
       <div className="absolute top-24 left-0 right-0 z-[1000] w-full px-4 flex justify-center pointer-events-none">
         <div className="glass-card p-1.5 flex gap-2 shadow-[0_12px_40px_rgba(0,0,0,0.5)] border-white/10 overflow-x-auto no-scrollbar max-w-full pointer-events-auto">

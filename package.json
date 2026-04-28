@@ -13,13 +13,16 @@
     "@google/generative-ai": "^0.24.1",
     "@react-google-maps/api": "^2.20.8",
     "axios": "^1.15.2",
+    "clsx": "^2.1.1",
     "firebase": "^12.12.1",
+    "framer-motion": "^12.38.0",
     "groq-sdk": "^1.1.2",
     "leaflet": "^1.9.4",
     "lucide-react": "^1.11.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "react-leaflet": "^5.0.0"
+    "react-leaflet": "^5.0.0",
+    "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
