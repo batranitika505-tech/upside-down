@@ -1,50 +1,64 @@
-# ResQ – Hyperlocal Disaster Response Platform
+# ResQ – Hyperlocal Pune Disaster Intelligence Platform 🚩🛡️
 
-**ResQ** is a real-time, hyperlocal disaster management platform designed to bridge the gap between official response and citizen awareness during crises. Built for the **Google Solution Challenge**, ResQ leverages Google Cloud, Firebase, and Gemini AI to provide actionable situational awareness when lives depend on it.
+**ResQ** is a state-of-the-art, real-time disaster management platform designed for the **Google Solution Challenge**. It transforms fragmented crisis data into a unified "Mission Control" for citizens, with a heavy focus on the unique geography of **Pune, India**.
 
-## 🚨 The Problem
-During disasters (floods, earthquakes, fires), situational awareness is often delayed or fragmented. People struggle to find:
-- Verified danger zones vs. safe shelters.
-- Safe navigation routes in real-time.
-- Multilingual, actionable guidance during panic.
+## 🚨 The Core Problem
+During floods, earthquakes, or civil unrest, situational awareness is often delayed. Citizens in Pune struggle to find:
+- **Hyperlocal Precision**: Which specific streets in Kasba Peth or Hadapsar are flooded?
+- **Immediate Guidance**: Where is the nearest open ground in Kothrud during an earthquake?
+- **Unified Interface**: A single place for 40+ types of hazards, from chemical leaks to traffic accidents.
 
-## ✨ The Solution
-ResQ provides a unified "Mission Control" for citizens:
-- **Live Crisis Map**: Dark-themed, high-performance map with real-time weather radar and hazard markers.
-- **Official Alert Engine**: Differentiated alerts from government authorities (NDMA/IMD) vs. crowdsourced reports.
-- **Crowd Intelligence**: A "3-report validation" system to prevent false info and verify hazards.
-- **ResQ AI Assistant**: A context-aware Gemini-powered bot that provides multilingual crisis guidance.
-- **PWA Ready**: Offline-first design for resilience during network instability.
+## ✨ Key Platform Features
 
-## 🛠️ Technology Stack
-- **Frontend**: React 19 + Vite (High Performance)
-- **Mapping**: Leaflet (Free/Open Source API-less Mapping)
-- **Live Data**: RainViewer API (Weather Radar Overlay)
-- **Backend**: Firebase Firestore (Real-time DB) & Authentication (Anonymous Login)
-- **AI Engine**: Google Gemini 1.5 Flash (Context-Aware Crisis Guidance)
-- **Styling**: Tailwind CSS with Framer Motion animations.
+### 1. Hyperlocal Pune Intelligence Expert 🧠
+ResQ features a specialized **Pune-based AI Response Expert** that provides street-level safety advice:
+- **Hyperlocal Safe/Danger Zones**: Hard-coded knowledge of Pune's riverbanks (Mutha/Mula), hilltops (Sinhagad/Taljai), and underground infrastructure (Metro stations).
+- **Multilingual Support**: Mandatory language-first protocol (English, Hindi, Marathi, etc.) to ensure guidance is understood during panic.
+- **AI-to-Map Synchronization**: When the AI mentions a location, the map automatically flies to that coordinate and highlights it with a unique purple sparkle marker.
 
-## 🚀 Key Innovations
-1. **Context-Aware AI**: Our AI doesn't just "chat"—it reads the live system data (nearby floods, blocked roads) to give tailored advice.
-2. **Citizen Validation**: Uses a peer-confirmation loop where hazards are "Unverified" until 3 community members confirm them.
-3. **Hyperlocal Navigation**: Integrated "Take Me to Safety" navigation to the nearest verified shelter.
+### 2. Specialized 9-Domain Disaster Dashboard 🗺️
+The map features an interactive, scrollable filter bar allowing users to pivot between specialized disaster focus modes:
+- **🌊 FLOOD**: Focuses on water levels and high-ground shelters.
+- **🏘️ EARTHQUAKE**: Prioritizes open fields and assembly grounds.
+- **🔥 FIRE**: Highlights industrial hazards and firebreak zones.
+- **🧪 TECH/MAN-MADE**: Specialized for chemical leaks and industrial accidents.
+- **...and 5 others**: Biological, Security, Transport, Weather, and All Hazards.
 
-## 🗺️ How it Works
-1. **Report**: Citizens report hazards via a simple 3-click interface.
-2. **Validate**: The system tracks confirmations. Once 3 users verify, the marker lights up as "Verified."
-3. **Alert**: High-priority authority alerts are pushed via a real-time Notification Hub.
-4. **Guide**: Users chat with ResQ AI for step-by-step first aid or evacuation procedures in English, Hindi, or Marathi.
+### 3. Global Real-Time Places Search 🔍
+Integrated with the **Photon (OSM) API**, ResQ allows users to search for any cafe, shop, or street in Pune instantly. The search is biased toward Pune coordinates, providing a seamless "Google Maps style" experience for reporting hazards at specific landmarks.
 
-## 🛠️ Setup & Installation
+### 4. Categorized Citizen Reporting 📝
+A robust reporting engine supporting **40+ disaster sub-types**. Citizens can report anything from a "Tsunami" to a "Train Derailment" in 3 clicks, with automatic categorization and severity levels.
+
+## 🛠️ Advanced Technology Stack
+- **Frontend**: React 19 + Vite (High-performance rendering)
+- **Mapping Engine**: Leaflet with API-less Google Maps tiles and custom dark-themed CSS filters.
+- **Real-Time Data**: Firebase Firestore (NoSQL) with high-frequency listeners.
+- **AI Core**: Groq Llama-3.3-70b (Low-latency, high-reasoning disaster expert).
+- **Location Services**: Photon API (OpenStreetMap-based live suggestions).
+- **Styling**: Premium Glassmorphism with Vanilla CSS and Tailwind v4.
+
+## 🗺️ The ResQ Workflow
+1. **Identify**: User mentions a location in the AI Chat.
+2. **Sync**: The map automatically centers on that location with a visual highlight.
+3. **Filter**: The user selects a specific disaster type (e.g., FLOOD) to see relevant shelters.
+4. **Report**: Citizen reports a hazard with street-level precision using live place suggestions.
+5. **Navigate**: Integrated "Get Directions" button for the nearest verified safe zone.
+
+## 🚀 Setup & Installation
 1. Clone the repository.
 2. Install dependencies: `npm install`
-3. Create a `.env` file with your Firebase and Gemini credentials:
+3. Create a `.env` file with your credentials:
    ```env
-   VITE_FIREBASE_API_KEY=your_key
-   VITE_GEMINI_API_KEY=your_key
-   ...
+   VITE_FIREBASE_API_KEY=...
+   VITE_FIREBASE_AUTH_DOMAIN=...
+   VITE_FIREBASE_PROJECT_ID=...
+   VITE_FIREBASE_STORAGE_BUCKET=...
+   VITE_FIREBASE_MESSAGING_SENDER_ID=...
+   VITE_FIREBASE_APP_ID=...
+   VITE_GROQ_API_KEY=...
    ```
-4. Run the development server: `npm run dev`
+4. Run locally: `npm run dev`
 
 ---
 *Built with ❤️ for the Google Solution Challenge 2024.*
